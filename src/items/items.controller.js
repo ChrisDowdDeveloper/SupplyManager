@@ -69,7 +69,7 @@ async function listById(req, res) {
 async function deleteItem(req, res) {
     const { id } = req.params;
     await service.deleteItem(id);
-    res.status(204);
+    res.status(204).end(); 
 }
 
 module.exports = {
