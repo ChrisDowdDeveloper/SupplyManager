@@ -13,13 +13,14 @@ router
     .get(controller.listByDateRange)
     .all(methodNotAllowed);
 
-
+router.route('/submit')
+    .post(controller.submitOrder)
+    .all(methodNotAllowed);
+    
 router.route("/:order_id")
     .get(controller.listById)
     .all(methodNotAllowed);
 
-router.route('/order/submit')
-    .post(controller.submitOrder)
-    .all(methodNotAllowed);
+
 
 module.exports = router;

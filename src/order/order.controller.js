@@ -1,5 +1,6 @@
 const service = require("./order.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
+const automate = require("../services/automation");
 
 async function list(req, res) {
     try {
@@ -32,8 +33,6 @@ async function listById(req, res) {
 
 async function listByDateRange(req, res) {
     const { from, to } = req.query;
-    console.log(from);
-    console.log(to);
     try {
         if (!from || !to) {
             return res.status(400).json({
@@ -48,7 +47,22 @@ async function listByDateRange(req, res) {
 }
 
 async function submitOrder(req, res) {
-    res.json({ message: "submit order called" })
+    const data = req.body;
+    const browser = data.browser
+    
+    try {
+
+        if(data.length == 0) return res.status(400).json({ error: "Invalid request" });
+
+        const result = await automate(browser, data.order);
+    
+        res.status(200).json({ message: "Order submitted successfully. Please wait a few minutes for the items to be added.", result });
+    
+    } catch(err) {
+        console.error("Error with order submission", err.message);
+        next(err);
+    };
+
 }
 
 module.exports = {

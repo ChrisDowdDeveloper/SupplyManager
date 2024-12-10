@@ -9,6 +9,8 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "knex": "^3.1.0",
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "selenium-webdriver": "^4.27.0",
+    "webdriver-manager": "^12.1.9"
   }
 }
